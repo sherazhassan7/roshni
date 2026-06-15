@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "category": "legit_eligibility_sms",
+    "register": "roman_urdu",
+    "message": "BISP: Aap ke ghar ke bachon ke liye Benazir Taleemi Wazaif manzoor ho gaya hai. Apni taleemi wazifa maloomat ke liye apna 13 hindson wala shanakhti card number 8171 par bhejein.",
+    "expected": "safe. No date stated, so deadline must say the message gives no date and to confirm at 8171. Action: send mother's CNIC to 8171."
+  },
+  {
+    "id": 2,
+    "category": "survey_required",
+    "register": "urdu",
+    "message": "آپ کی اہلیت کی تصدیق کے لیے قریبی بے نظیر انکم سپورٹ پروگرام کے دفتر میں ڈائنامک سروے مکمل کروانا ضروری ہے۔",
+    "expected": "safe. Action: visit nearest BISP office to complete the survey. No amount or date, do not invent."
+  },
+  {
+    "id": 3,
+    "category": "biometric_verification",
+    "register": "urdu",
+    "message": "اطلاع: بے نظیر کفالت کی ادائیگی کے لیے بائیو میٹرک تصدیق اب لازمی ہے۔ ادائیگی حاصل کرنے سے پہلے مقررہ بینک مرکز پر انگوٹھے کی تصدیق کروائیں۔",
+    "expected": "safe but confusing. Explain 'biometric' in plain words (thumb verification). Action: do thumb verification at the designated bank center before payment."
+  },
+  {
+    "id": 4,
+    "category": "taleemi_wazaif_attendance",
+    "register": "mixed",
+    "message": "Benazir Taleemi Wazaif: aap ke bachay ki qist tab milegi jab school haaziri 70% se ooper hogi. Bachay ki haaziri ka record school se tasdeeq karwa kar nazdeeki BISP office mein jama karwayen.",
+    "expected": "safe. What matters: attendance must stay above 70%. Action: get attendance record from school, submit at BISP office."
+  },
+  {
+    "id": 5,
+    "category": "school_scholarship_slip",
+    "register": "urdu",
+    "message": "ہمارے سکول کی جانب سے مطلع کیا جاتا ہے کہ آپ کی بیٹی وظیفے کی حقدار ہے۔ براہِ کرم بچی کا بے فارم اور والد کا شناختی کارڈ کی کاپی 20 تاریخ تک سکول کے دفتر میں جمع کروائیں، بصورتِ دیگر وظیفہ منسوخ ہو جائے گا۔",
+    "expected": "safe. HAS a clear deadline (the 20th), so state it. Action: submit daughter's B-Form and father's CNIC copy to the school office by the 20th. official_source here is the school office, not 8171."
+  },
+  {
+    "id": 6,
+    "category": "incomplete_no_deadline",
+    "register": "roman_urdu",
+    "message": "Aap ke kaghzaat namukammal hain. Mukammal karwa kar jama karwayen warna wazifa ruk sakta hai.",
+    "expected": "Tests the do-not-invent rule. The message does not say WHICH documents or BY WHEN. Model must say the message does not specify which papers or a date, and tell them to confirm at 8171 or the BISP office. Do not guess."
+  },
+  {
+    "id": 7,
+    "category": "scam_prize",
+    "register": "roman_urdu",
+    "message": "Mubarak ho! Aap ne BISP lottery mein 25000 rupay jeet liye hain. Inaam hasil karne ke liye apna shanakhti card number aur ATM PIN is number par WhatsApp karein: 0312XXXXXXX",
+    "expected": "likely_scam. Asks for CNIC and ATM PIN, claims a lottery, uses a personal WhatsApp number. Warn plainly: never share your PIN, BISP runs no lottery and never asks for a PIN, trust only 8171."
+  },
+  {
+    "id": 8,
+    "category": "scam_fee",
+    "register": "mixed",
+    "message": "Apki BISP qist ready hai. Foran release karwane ke liye 500 rupay processing fee Easypaisa par bhejein, warna paisa wapas chala jayega.",
+    "expected": "likely_scam. Asks for a fee to release money. Real BISP is free and never charges a fee. Warn not to pay."
+  },
+  {
+    "id": 9,
+    "category": "scam_link",
+    "register": "roman_urdu",
+    "message": "BISP 8171 new registration open. Abhi apply karein is link par aur 25000 hasil karein: http://bisp-gov-pk.online/claim",
+    "expected": "likely_scam or caution. Suspicious unofficial link. Tell them the official check is sending the CNIC to 8171, and not to click unknown links."
+  },
+  {
+    "id": 10,
+    "category": "legit_english_letter",
+    "register": "english",
+    "message": "Dear Parent, your child has been shortlisted for the need-based education stipend. Please submit attested copies of the B-Form and proof of enrollment to the District Education Office before the 25th of this month.",
+    "expected": "safe. Explain in Urdu even though the message is English. HAS a deadline (the 25th). Action: submit attested B-Form and proof of enrollment to the District Education Office by the 25th."
+  },
+  {
+    "id": 11,
+    "category": "unrelated",
+    "register": "roman_urdu",
+    "message": "Yaar kal cricket match dekhne aa rahe ho? 4 baje ground par milte hain.",
+    "expected": "Not official and not a scam. Model should gently say it can only help explain official or support-related messages, and keep the other fields short or empty."
+  },
+  {
+    "id": 12,
+    "category": "ambiguous_official_short",
+    "register": "urdu",
+    "message": "آپ اہل نہیں ہیں۔",
+    "expected": "safe (this is a real 8171-style reply meaning 'you are not eligible'). Explain gently: BISP records currently show not eligible, and if they believe this is a mistake they can visit the BISP office. Do not invent a reason."
+  }
+]

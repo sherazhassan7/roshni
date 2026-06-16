@@ -140,7 +140,7 @@ async def speak(req: SpeakRequest):
     t0 = time.monotonic()
     # Try primary model; fall back to tts-1 once if it errors (e.g. quota/availability).
     # This is two calls only on primary failure, not a blind retry loop.
-    for model in ("tts-1-hd", "tts-1"):
+    for model in ("gpt-4o-mini-tts", "tts-1"):
         try:
             tts = client.audio.speech.create(
                 model=model,

@@ -70,7 +70,7 @@ What each field means (write it in that object's language):
 - "safety_reason": a short plain explanation of why you chose the safety_status.
 - "official_source": how to verify. For BISP matters: send the mother's 13-digit CNIC (without dashes) to 8171, or visit the nearest BISP office.
 - "note": one honest sentence reminding them that only BISP or the school decides who qualifies.
-- "spoken_version": a single natural flowing paragraph combining the above, written to sound good when read aloud. For "urdu" this MUST be proper Urdu script. Two extra rules for spoken_version only: (1) Do not open a sentence with a bare "یہ" immediately followed by a noun, because the voice pauses awkwardly there. Instead open with a fuller phrase that flows as one unit, for example "یہ میسج" as a unit, or a short natural lead-in like "آپ کو بتانا ہے کہ..." or "سنیں،". (2) Write in flowing, connected sentences a person would actually say out loud, not clipped one-word fragments. Every sentence should connect smoothly to the next when spoken.
+- "spoken_version": a single natural flowing paragraph combining the above, written to sound good when read aloud. For "urdu" this MUST be proper Urdu script, because a voice will read it to people who cannot read.
 
 ## Per-type field rules
 

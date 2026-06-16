@@ -69,6 +69,15 @@
       direction: rtl;
     }
 
+    .tagline-en {
+      font-family: var(--font-s);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+      direction: ltr;
+      margin-top: 5px;
+    }
+
     .input-card {
       background: var(--card);
       border: 1px solid var(--hairline);
@@ -184,8 +193,39 @@
       display: none;
     }
 
+    #loading-state {
+      display: none;
+      margin-top: var(--gap);
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .loading-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .spinner-ink {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid var(--hairline);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    .loading-text {
+      font-family: var(--font-u);
+      font-size: 16px;
+      line-height: 2.0;
+      color: var(--muted);
+    }
+
     #empty-state {
-      margin-top: 12px;
+      margin-top: 4px;
       text-align: center;
       direction: rtl;
     }
@@ -195,7 +235,7 @@
       font-size: 16px;
       line-height: 2.0;
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     .example-label {
@@ -205,13 +245,19 @@
       margin-bottom: 6px;
     }
 
+    .example-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .example-card {
       background: var(--card);
       border: 1px solid var(--hairline);
       border-radius: var(--radius);
-      padding: 16px 18px;
+      padding: 12px 14px;
       font-family: var(--font-u);
-      font-size: 15px;
+      font-size: 14px;
       line-height: 2.0;
       color: #9AA8A3;
       cursor: pointer;
@@ -220,6 +266,15 @@
     }
 
     .example-card:hover { border-color: var(--ink); }
+
+    .example-tag {
+      display: block;
+      font-family: var(--font-u);
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.75;
+      margin-bottom: 2px;
+    }
 
     #result { margin-top: var(--gap); display: none; }
 
@@ -440,7 +495,7 @@
       border-top-color: #fff;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
-       flex-shrink: 0;
+      flex-shrink: 0;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -464,6 +519,7 @@
       <span class="brand">روشنی</span>
     </div>
     <p class="tagline">اپنا پیغام آسان زبان میں سمجھیں</p>
+    <p class="tagline-en">Understand any government or BISP message in plain language, and know if it's a scam.</p>
   </header>
 
   <main>
@@ -486,11 +542,25 @@
 
     <div id="error"></div>
 
+    <div id="loading-state">
+      <div class="loading-inner">
+        <span class="spinner-ink"></span>
+        <span class="loading-text">سمجھ رہا ہوں…</span>
+      </div>
+    </div>
+
     <div id="empty-state">
       <p class="empty-instruction">کوئی بھی سرکاری، بی آئی ایس پی یا سکول کا میسج یہاں ڈالیں</p>
       <p class="example-label">مثال</p>
-      <div class="example-card" onclick="document.getElementById('msg').value='BISP: آپ کے بچوں کے لیے تعلیمی وظائف منظور ہو گئے ہیں۔ شناختی کارڈ نمبر 8171 پر بھیجیں۔'; document.getElementById('msg').focus()">
-        "BISP: آپ کے بچوں کے لیے تعلیمی وظائف منظور ہو گئے ہیں۔ شناختی کارڈ نمبر 8171 پر بھیجیں۔"
+      <div class="example-cards">
+        <div class="example-card" onclick="document.getElementById('msg').value='بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔'; document.getElementById('msg').focus()">
+          <span class="example-tag">سرکاری میسج</span>
+          "بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔"
+        </div>
+        <div class="example-card" onclick="document.getElementById('msg').value='مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔'; document.getElementById('msg').focus()">
+          <span class="example-tag">مشکوک میسج</span>
+          "مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔"
+        </div>
       </div>
     </div>
 
@@ -664,6 +734,9 @@
       btn.disabled  = true;
       btn.innerHTML = '<span class="spinner"></span>';
 
+      document.getElementById('empty-state').style.display   = 'none';
+      document.getElementById('loading-state').style.display = 'block';
+
       const explainCtrl = new AbortController();
       const explainTid  = setTimeout(() => explainCtrl.abort(), 25000);
 
@@ -683,7 +756,6 @@
         lastData = await res.json();
         console.log('[explain] response:', JSON.stringify(lastData, null, 2));
 
-        document.getElementById('empty-state').style.display    = 'none';
         document.getElementById('collapsed-snippet').textContent = msg;
         document.getElementById('input-section').style.display  = 'none';
         document.getElementById('collapsed-bar').style.display  = 'flex';
@@ -704,6 +776,7 @@
         document.getElementById('collapsed-bar').style.display = 'none';
       } finally {
         clearTimeout(explainTid);
+        document.getElementById('loading-state').style.display = 'none';
         btn.disabled    = false;
         btn.textContent = 'سمجھائیں';
       }

@@ -246,7 +246,7 @@
     }
 
     .example-chip {
-      padding: 7px 16px;
+      padding: 8px 16px;
       font-family: var(--font-u);
       font-size: 13px;
       line-height: 1.8;
@@ -256,10 +256,20 @@
       border-radius: 999px;
       cursor: pointer;
       transition: border-color 0.15s, color 0.15s;
-      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .example-chip:hover { border-color: var(--ink); color: var(--ink); }
+
+    .chip-en {
+      font-family: var(--font-s);
+      font-size: 10px;
+      line-height: 1.4;
+      opacity: 0.65;
+    }
 
     #result { margin-top: var(--gap); display: none; }
 
@@ -351,6 +361,7 @@
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       gap: 8px;
+      direction: ltr;
       margin-bottom: var(--gap);
       transition: background 0.15s;
     }
@@ -358,6 +369,13 @@
     #listen-btn:not(:disabled):hover { background: #0A3D32; }
     #listen-btn:disabled { background: #8AAAA4; cursor: not-allowed; }
     #listen-btn .ti { font-size: 1.1rem; }
+
+    .listen-en {
+      font-family: var(--font-s);
+      font-size: 11px;
+      opacity: 0.65;
+      font-weight: 400;
+    }
 
     .fields-card {
       background: var(--card);
@@ -537,8 +555,14 @@
     <div id="empty-state">
       <p class="empty-instruction">کوئی بھی سرکاری، بی آئی ایس پی یا سکول کا میسج یہاں ڈالیں</p>
       <div class="example-chips">
-        <button class="example-chip" onclick="document.getElementById('msg').value='بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔'; document.getElementById('msg').focus()">سرکاری میسج آزمائیں</button>
-        <button class="example-chip" onclick="document.getElementById('msg').value='مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔'; document.getElementById('msg').focus()">دھوکہ آزمائیں</button>
+        <button class="example-chip" onclick="document.getElementById('msg').value='بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔'; document.getElementById('msg').focus()">
+          <span>سرکاری میسج آزمائیں</span>
+          <span class="chip-en">Try a government message</span>
+        </button>
+        <button class="example-chip" onclick="document.getElementById('msg').value='مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔'; document.getElementById('msg').focus()">
+          <span>دھوکہ آزمائیں</span>
+          <span class="chip-en">Try a scam message</span>
+        </button>
       </div>
     </div>
 
@@ -566,6 +590,7 @@
       <button id="listen-btn" onclick="speak()">
         <i class="ti ti-player-play"></i>
         <span id="listen-label">سن کر سمجھیں</span>
+        <span class="listen-en">Listen</span>
       </button>
       <p id="speak-error" style="display:none;font-size:14px;color:#C0392B;margin:4px 0 0;text-align:center"></p>
 
@@ -709,8 +734,7 @@
         return;
       }
 
-      btn.disabled  = true;
-      btn.innerHTML = '<span class="spinner"></span>';
+      btn.disabled = true;
 
       document.getElementById('empty-state').style.display   = 'none';
       document.getElementById('loading-state').style.display = 'block';
@@ -857,8 +881,9 @@
 
     function _listenBtnReset() {
       const btn = document.getElementById('listen-btn');
+      const enHint = currentLang !== 'english' ? '<span class="listen-en">Listen</span>' : '';
       btn.disabled  = false;
-      btn.innerHTML = `<i class="ti ti-player-play"></i><span id="listen-label">${LABELS[currentLang].listenLabel}</span>`;
+      btn.innerHTML = `<i class="ti ti-player-play"></i><span id="listen-label">${LABELS[currentLang].listenLabel}</span>${enHint}`;
     }
 
     function _listenBtnPlaying() {

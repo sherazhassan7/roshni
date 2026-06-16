@@ -144,7 +144,7 @@ async def speak(req: SpeakRequest):
         try:
             tts = client.audio.speech.create(
                 model=model,
-                voice="alloy",
+                voice="nova",
                 input=text,
                 timeout=20.0,
             )

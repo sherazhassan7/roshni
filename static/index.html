@@ -11,10 +11,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 
   <style>
-    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── Tokens ── */
     :root {
       --bg:       #F7F6F1;
       --card:     #FFFFFF;
@@ -28,7 +26,6 @@
       --font-s:   'Inter', system-ui, -apple-system, sans-serif;
     }
 
-    /* ── Base ── */
     body {
       font-family: var(--font-s);
       background: var(--bg);
@@ -39,7 +36,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Logo lockup — not interactive ── */
     .logo-lockup {
       text-align: center;
       padding: 40px 0 32px;
@@ -57,20 +53,10 @@
       margin-bottom: 8px;
     }
 
-    .sun-mark {
-      width: 42px; height: 42px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-
     .brand {
       font-family: var(--font-u);
-      font-size: 36px;
-      font-weight: 700;
+      font-size: 40px;
+      font-weight: 500;
       color: var(--ink);
       line-height: 1;
     }
@@ -83,7 +69,6 @@
       direction: rtl;
     }
 
-    /* ── Input card ── */
     .input-card {
       background: var(--card);
       border: 1px solid var(--hairline);
@@ -123,7 +108,6 @@
       margin: 8px 0 14px;
     }
 
-    /* ── Primary button ── */
     .btn-primary {
       width: 100%;
       padding: 15px;
@@ -143,9 +127,8 @@
     .btn-primary:not(:disabled):hover { background: #0A3D32; }
     .btn-primary:disabled { background: #8AAAA4; cursor: not-allowed; }
 
-    /* ── Collapsed message bar ── */
     #collapsed-bar {
-      display: none;       /* flex when visible */
+      display: none;
       align-items: center;
       gap: 10px;
       padding: 12px 16px;
@@ -190,7 +173,6 @@
       flex-shrink: 0;
     }
 
-    /* ── Error ── */
     #error {
       margin-top: 14px;
       padding: 13px 16px;
@@ -202,10 +184,45 @@
       display: none;
     }
 
-    /* ── Result section ── */
+    #empty-state {
+      margin-top: 12px;
+      text-align: center;
+      direction: rtl;
+    }
+
+    .empty-instruction {
+      font-family: var(--font-u);
+      font-size: 16px;
+      line-height: 2.0;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .example-label {
+      font-family: var(--font-u);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .example-card {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      font-family: var(--font-u);
+      font-size: 15px;
+      line-height: 2.0;
+      color: #9AA8A3;
+      cursor: pointer;
+      text-align: right;
+      transition: border-color 0.15s;
+    }
+
+    .example-card:hover { border-color: var(--ink); }
+
     #result { margin-top: var(--gap); display: none; }
 
-    /* ── Language toggle ── */
     #lang-toggle {
       display: flex;
       gap: 6px;
@@ -231,7 +248,6 @@
     .lang-btn.active { background: var(--ink); color: #fff; }
     .lang-btn:not(.active):hover { background: rgba(14, 77, 64, 0.07); }
 
-    /* ── Verdict banner ── */
     .verdict-banner {
       border-radius: var(--radius);
       padding: 22px 24px;
@@ -275,7 +291,6 @@
       border-top: 1px solid rgba(255, 255, 255, 0.25);
     }
 
-    /* LTR verdict text */
     #result.dir-ltr #verdict-label,
     #result.dir-ltr #verdict-reason {
       font-family: var(--font-s);
@@ -283,7 +298,6 @@
       line-height: 1.5;
     }
 
-    /* ── Listen button ── */
     #listen-btn {
       width: 100%;
       padding: 15px;
@@ -305,7 +319,6 @@
     #listen-btn:disabled { background: #8AAAA4; cursor: not-allowed; }
     #listen-btn .ti { font-size: 1.1rem; }
 
-    /* ── Fields card with hairline dividers ── */
     .fields-card {
       background: var(--card);
       border: 1px solid var(--hairline);
@@ -341,13 +354,11 @@
       color: #1A1A1A;
     }
 
-    /* Urdu script labels need the Nastaliq font */
     #result.dir-rtl .field-label {
       font-family: var(--font-u);
       line-height: 2.0;
     }
 
-    /* Urdu values */
     #result.dir-rtl .field-value,
     #result.dir-rtl .field-value li {
       font-family: var(--font-u);
@@ -356,7 +367,6 @@
       color: #1A1A1A;
     }
 
-    /* Roman / English values */
     #result.dir-ltr .field-value,
     #result.dir-ltr .field-value li {
       font-family: var(--font-s);
@@ -365,12 +375,10 @@
       color: #1A1A1A;
     }
 
-    /* Numbered list */
     #r-todo { list-style: decimal; }
     #result.dir-rtl #r-todo { padding-right: 22px; padding-left: 0; }
     #result.dir-ltr #r-todo { padding-left: 22px;  padding-right: 0; }
 
-    /* ── Note bar (outside fields card, at bottom) ── */
     .note-bar {
       display: flex;
       align-items: flex-start;
@@ -387,17 +395,12 @@
       margin-top: 3px;
     }
 
-    #result.dir-rtl .note-icon { margin-top: 8px; } /* Nastaliq descenders need extra space */
+    #result.dir-rtl .note-icon { margin-top: 8px; }
 
-    #r-note {
-      font-size: 13px;
-      color: var(--muted);
-    }
+    #r-note { font-size: 13px; color: var(--muted); }
+    #result.dir-rtl #r-note { font-family: var(--font-u); font-size: 14px; line-height: 2.0; }
+    #result.dir-ltr #r-note { font-family: var(--font-s); line-height: 1.55; }
 
-    #result.dir-rtl #r-note  { font-family: var(--font-u); font-size: 14px; line-height: 2.0; }
-    #result.dir-ltr #r-note  { font-family: var(--font-s); line-height: 1.55; }
-
-    /* ── Unrelated card ── */
     #unrelated-card {
       display: none;
       background: var(--card);
@@ -430,7 +433,6 @@
       color: var(--muted);
     }
 
-    /* ── Spinner ── */
     .spinner {
       display: inline-block;
       width: 20px; height: 20px;
@@ -438,7 +440,7 @@
       border-top-color: #fff;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
-      flex-shrink: 0;
+       flex-shrink: 0;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -446,10 +448,19 @@
 </head>
 <body>
 
-  <!-- Logo — not interactive -->
   <header class="logo-lockup">
     <div class="logo-row">
-      <div class="sun-mark"><i class="ti ti-sun"></i></div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C98A2A" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <line x1="12" y1="5.5" x2="12" y2="3"/>
+        <line x1="16.6" y1="7.4" x2="18.4" y2="5.6"/>
+        <line x1="18.5" y1="12" x2="21" y2="12"/>
+        <line x1="16.6" y1="16.6" x2="18.4" y2="18.4"/>
+        <line x1="12" y1="18.5" x2="12" y2="21"/>
+        <line x1="7.4" y1="16.6" x2="5.6" y2="18.4"/>
+        <line x1="5.5" y1="12" x2="3" y2="12"/>
+        <line x1="7.4" y1="7.4" x2="5.6" y2="5.6"/>
+      </svg>
       <span class="brand">روشنی</span>
     </div>
     <p class="tagline">اپنا پیغام آسان زبان میں سمجھیں</p>
@@ -457,7 +468,6 @@
 
   <main>
 
-    <!-- Full input (collapses after a result) -->
     <section id="input-section">
       <div class="input-card">
         <textarea id="msg" dir="auto" placeholder="یہاں اپنا پیغام لکھیں یا پیسٹ کریں"></textarea>
@@ -466,7 +476,6 @@
       </div>
     </section>
 
-    <!-- Compact collapsed bar — tap to re-expand -->
     <div id="collapsed-bar" onclick="expandInput()">
       <div class="collapsed-body">
         <span class="collapsed-lbl">آپ کا پیغام</span>
@@ -477,23 +486,27 @@
 
     <div id="error"></div>
 
-    <!-- Result -->
+    <div id="empty-state">
+      <p class="empty-instruction">کوئی بھی سرکاری، بی آئی ایس پی یا سکول کا میسج یہاں ڈالیں</p>
+      <p class="example-label">مثال</p>
+      <div class="example-card" onclick="document.getElementById('msg').value='BISP: آپ کے بچوں کے لیے تعلیمی وظائف منظور ہو گئے ہیں۔ شناختی کارڈ نمبر 8171 پر بھیجیں۔'; document.getElementById('msg').focus()">
+        "BISP: آپ کے بچوں کے لیے تعلیمی وظائف منظور ہو گئے ہیں۔ شناختی کارڈ نمبر 8171 پر بھیجیں۔"
+      </div>
+    </div>
+
     <div id="result" class="dir-rtl">
 
-      <!-- Language toggle -->
       <div id="lang-toggle">
         <button class="lang-btn active" onclick="setLang('urdu', this)">اردو</button>
         <button class="lang-btn" onclick="setLang('roman_urdu', this)">Roman Urdu</button>
         <button class="lang-btn" onclick="setLang('english', this)">English</button>
       </div>
 
-      <!-- Unrelated message card (only for message_type="unrelated") -->
       <div id="unrelated-card">
         <i class="ti ti-message-question unrelated-icon"></i>
         <p class="unrelated-text"></p>
       </div>
 
-      <!-- Verdict banner (hero) -->
       <div id="verdict-banner" class="verdict-banner v-safe">
         <div class="verdict-main">
           <i id="verdict-icon" class="ti ti-shield-check"></i>
@@ -502,14 +515,12 @@
         <p id="verdict-reason"></p>
       </div>
 
-      <!-- Listen -->
       <button id="listen-btn" onclick="speak()">
         <i class="ti ti-player-play"></i>
         <span id="listen-label">سن کر سمجھیں</span>
       </button>
       <p id="speak-error" style="display:none;font-size:14px;color:#C0392B;margin:4px 0 0;text-align:center"></p>
 
-      <!-- Fields card -->
       <div class="fields-card">
 
         <div class="field-row">
@@ -552,15 +563,14 @@
           <p id="r-source" class="field-value"></p>
         </div>
 
-      </div><!-- .fields-card -->
+      </div>
 
-      <!-- Note — muted, outside the card -->
       <div class="note-bar">
         <i class="ti ti-info-circle note-icon"></i>
         <p id="r-note"></p>
       </div>
 
-    </div><!-- #result -->
+    </div>
 
   </main>
 
@@ -616,12 +626,11 @@
       likely_scam: 'ti-alert-triangle',
     };
 
-    let lastData        = null;
-    let currentLang     = 'urdu';
-    let audioPlayer     = null;
-    let audioBlobCache  = {};   // lang → { promise: Promise, blob: Blob|null }
+    let lastData       = null;
+    let currentLang    = 'urdu';
+    let audioPlayer    = null;
+    let audioBlobCache = {};
 
-    /* ── Language toggle ── */
     function setLang(lang, btn) {
       currentLang = lang;
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -632,14 +641,12 @@
       }
     }
 
-    /* ── Re-expand collapsed input ── */
     function expandInput() {
       document.getElementById('input-section').style.display = 'block';
       document.getElementById('collapsed-bar').style.display = 'none';
       document.getElementById('msg').focus();
     }
 
-    /* ── Submit ── */
     async function explain() {
       const msg      = document.getElementById('msg').value.trim();
       const btn      = document.getElementById('explain-btn');
@@ -676,12 +683,11 @@
         lastData = await res.json();
         console.log('[explain] response:', JSON.stringify(lastData, null, 2));
 
-        /* Collapse the input */
+        document.getElementById('empty-state').style.display    = 'none';
         document.getElementById('collapsed-snippet').textContent = msg;
         document.getElementById('input-section').style.display  = 'none';
         document.getElementById('collapsed-bar').style.display  = 'flex';
 
-        /* Reset language toggle to Urdu */
         currentLang    = 'urdu';
         audioBlobCache = {};
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -703,7 +709,6 @@
       }
     }
 
-    /* ── Render result for selected language ── */
     function renderLang(data, lang) {
       const L        = LABELS[lang];
       const resultEl = document.getElementById('result');
@@ -716,31 +721,27 @@
         return;
       }
 
-      /* Direction always applies */
       resultEl.classList.toggle('dir-rtl', L.dir === 'rtl');
       resultEl.classList.toggle('dir-ltr', L.dir === 'ltr');
       resultEl.setAttribute('dir', L.dir);
 
       const isUnrelated = (data.message_type === 'unrelated');
 
-      /* Toggle which layout is visible */
-      document.getElementById('unrelated-card').style.display  = isUnrelated ? 'flex' : 'none';
-      document.getElementById('verdict-banner').style.display  = isUnrelated ? 'none' : '';
-      document.getElementById('speak-error').style.display     = 'none';
-      document.querySelector('.fields-card').style.display     = isUnrelated ? 'none' : '';
-      document.querySelector('.note-bar').style.display        = isUnrelated ? 'none' : '';
+      document.getElementById('unrelated-card').style.display = isUnrelated ? 'flex' : 'none';
+      document.getElementById('verdict-banner').style.display = isUnrelated ? 'none' : '';
+      document.getElementById('speak-error').style.display    = 'none';
+      document.querySelector('.fields-card').style.display    = isUnrelated ? 'none' : '';
+      document.querySelector('.note-bar').style.display       = isUnrelated ? 'none' : '';
 
       if (isUnrelated) {
-        document.getElementById('listen-label').textContent      = L.listenLabel;
-        document.querySelector('.unrelated-text').textContent    = block.summary ?? '';
+        document.getElementById('listen-label').textContent   = L.listenLabel;
+        document.querySelector('.unrelated-text').textContent = block.summary ?? '';
         resultEl.style.display = 'block';
         return;
       }
 
-      /* ── Normal layout (official / scam / unclear) ── */
       const status = data.safety_status ?? 'safe';
 
-      /* Labels */
       document.getElementById('listen-label').textContent = L.listenLabel;
       document.getElementById('h-summary').textContent    = L.summary;
       document.getElementById('h-applies').textContent    = L.applies_to_you;
@@ -748,26 +749,23 @@
       document.getElementById('h-deadline').textContent   = L.deadline;
       document.getElementById('h-source').textContent     = L.official_source;
 
-      /* Values */
-      document.getElementById('r-summary').textContent   = block.summary         ?? '';
-      document.getElementById('r-applies').textContent   = block.applies_to_you  ?? '';
-      document.getElementById('r-deadline').textContent  = block.deadline         ?? '';
-      document.getElementById('r-source').textContent    = block.official_source  ?? '';
-      document.getElementById('r-note').textContent      = block.note             ?? '';
+      document.getElementById('r-summary').textContent  = block.summary        ?? '';
+      document.getElementById('r-applies').textContent  = block.applies_to_you ?? '';
+      document.getElementById('r-deadline').textContent = block.deadline        ?? '';
+      document.getElementById('r-source').textContent   = block.official_source ?? '';
+      document.getElementById('r-note').textContent     = block.note            ?? '';
 
-      /* Verdict banner */
       const verdictEl     = document.getElementById('verdict-banner');
       const verdictIcon   = document.getElementById('verdict-icon');
       const verdictLabel  = document.getElementById('verdict-label');
       const verdictReason = document.getElementById('verdict-reason');
 
-      verdictEl.className       = `verdict-banner v-${status}`;
-      verdictIcon.className     = `ti ${VERDICT_ICONS[status] ?? 'ti-shield-check'}`;
-      verdictLabel.textContent  = L.safetyLabel[status] ?? status;
+      verdictEl.className      = `verdict-banner v-${status}`;
+      verdictIcon.className    = `ti ${VERDICT_ICONS[status] ?? 'ti-shield-check'}`;
+      verdictLabel.textContent = L.safetyLabel[status] ?? status;
       verdictReason.textContent = block.safety_reason ?? '';
       verdictReason.style.display = (status !== 'safe' && block.safety_reason) ? 'block' : 'none';
 
-      /* What to do — numbered list */
       const ol = document.getElementById('r-todo');
       ol.innerHTML = '';
       (Array.isArray(block.what_to_do) ? block.what_to_do : []).forEach(step => {
@@ -779,7 +777,6 @@
       resultEl.style.display = 'block';
     }
 
-    /* ── TTS pre-fetch ── */
     function prefetchAudio(lang) {
       if (!lastData || audioBlobCache[lang]) return;
       const b    = lastData[lang];
@@ -801,7 +798,6 @@
       .then(res => { if (!res.ok) throw new Error('TTS failed'); return res.blob(); })
       .then(blob => { entry.blob = blob; return blob; })
       .catch(err => {
-        /* Fail silently — on click the button will fetch on demand instead */
         console.warn('[prefetch] failed, will retry on click:', lang, err.name);
         delete audioBlobCache[lang];
         return null;
@@ -827,22 +823,19 @@
       setTimeout(() => { el.style.display = 'none'; }, 4000);
     }
 
-    /* ── TTS via /speak ── */
     async function speak() {
       if (!lastData) return;
       document.getElementById('speak-error').style.display = 'none';
 
-      /* If already playing, this click means "stop" */
       if (audioPlayer && !audioPlayer.paused) {
         const a = audioPlayer;
-        audioPlayer = null;          // null first so the 'pause' event doesn't double-cleanup
+        audioPlayer = null;
         a.pause();
         if (a._blobUrl) URL.revokeObjectURL(a._blobUrl);
         _listenBtnReset();
         return;
       }
 
-      /* Stop any stalled/paused leftover */
       if (audioPlayer) {
         const a = audioPlayer;
         audioPlayer = null;
@@ -853,13 +846,11 @@
       const btn   = document.getElementById('listen-btn');
       const entry = audioBlobCache[currentLang];
 
-      /* ── Case 1: blob already ready — play synchronously within click gesture ── */
       if (entry?.blob) {
         _playBlob(entry.blob, btn);
         return;
       }
 
-      /* ── Case 2: prefetch in flight or nothing cached yet ── */
       btn.disabled  = true;
       btn.innerHTML = '<span class="spinner"></span>';
 
@@ -868,7 +859,6 @@
         if (entry?.promise) {
           blob = await entry.promise;
         } else {
-          /* Fallback: fetch on demand */
           const _b   = lastData[currentLang];
           const text = _b?.spoken_version || _b?.summary || '';
           if (!text) { _listenBtnReset(); return; }
@@ -909,7 +899,6 @@
       audio._blobUrl = blobUrl;
       audioPlayer    = audio;
 
-      /* Spinner until audio is actually audible */
       btn.disabled  = true;
       btn.innerHTML = '<span class="spinner"></span>';
 
@@ -920,15 +909,10 @@
         _listenBtnReset();
       }
 
-      /* Real audio events drive button state */
       audio.addEventListener('playing', () => { _listenBtnPlaying(); });
-
-      /* 'pause' covers browser-initiated pauses (tab switch, interruption).
-         Our own stop code nulls audioPlayer before calling pause(),
-         so the guard below prevents double-cleanup in that case. */
-      audio.addEventListener('pause',  () => { if (audioPlayer === audio) _cleanup(false); else _listenBtnReset(); });
-      audio.addEventListener('ended',  () => { _cleanup(false); });
-      audio.addEventListener('error',  () => { _cleanup(true);  });
+      audio.addEventListener('pause',   () => { if (audioPlayer === audio) _cleanup(false); else _listenBtnReset(); });
+      audio.addEventListener('ended',   () => { _cleanup(false); });
+      audio.addEventListener('error',   () => { _cleanup(true);  });
 
       audio.play().catch(e => {
         console.error('[audio.play]', e);
@@ -936,7 +920,6 @@
       });
     }
 
-    /* ── Error display ── */
     function showError(msg) {
       const el = document.getElementById('error');
       el.textContent   = msg;

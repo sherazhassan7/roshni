@@ -238,43 +238,28 @@
       margin-bottom: 10px;
     }
 
-    .example-label {
-      font-family: var(--font-u);
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .example-cards {
+    .example-chips {
       display: flex;
-      flex-direction: column;
       gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    .example-card {
-      background: var(--card);
-      border: 1px solid var(--hairline);
-      border-radius: var(--radius);
-      padding: 12px 14px;
+    .example-chip {
+      padding: 7px 16px;
       font-family: var(--font-u);
-      font-size: 14px;
-      line-height: 2.0;
-      color: #9AA8A3;
-      cursor: pointer;
-      text-align: right;
-      transition: border-color 0.15s;
-    }
-
-    .example-card:hover { border-color: var(--ink); }
-
-    .example-tag {
-      display: block;
-      font-family: var(--font-u);
-      font-size: 10px;
+      font-size: 13px;
+      line-height: 1.8;
       color: var(--muted);
-      opacity: 0.75;
-      margin-bottom: 2px;
+      background: transparent;
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
     }
+
+    .example-chip:hover { border-color: var(--ink); color: var(--ink); }
 
     #result { margin-top: var(--gap); display: none; }
 
@@ -551,16 +536,9 @@
 
     <div id="empty-state">
       <p class="empty-instruction">کوئی بھی سرکاری، بی آئی ایس پی یا سکول کا میسج یہاں ڈالیں</p>
-      <p class="example-label">مثال</p>
-      <div class="example-cards">
-        <div class="example-card" onclick="document.getElementById('msg').value='بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔'; document.getElementById('msg').focus()">
-          <span class="example-tag">سرکاری میسج</span>
-          "بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔"
-        </div>
-        <div class="example-card" onclick="document.getElementById('msg').value='مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔'; document.getElementById('msg').focus()">
-          <span class="example-tag">مشکوک میسج</span>
-          "مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔"
-        </div>
+      <div class="example-chips">
+        <button class="example-chip" onclick="document.getElementById('msg').value='بے نظیر انکم سپورٹ پروگرام کی جانب سے مطلع کیا جاتا ہے کہ آپ کے زیرِ کفالت طالبعلم کے تعلیمی وظیفے کے اجراء کے لیے اسکول حاضری کا تناسب ستر فیصد سے زائد ہونا اور نادرا ریکارڈ کی تصدیق لازمی ہے، بصورتِ دیگر ادائیگی موخر کر دی جائے گی۔'; document.getElementById('msg').focus()">سرکاری میسج آزمائیں</button>
+        <button class="example-chip" onclick="document.getElementById('msg').value='مبارک ہو! آپ نے بے نظیر پروگرام میں 25000 روپے جیتے ہیں۔ رقم حاصل کرنے کے لیے اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں۔'; document.getElementById('msg').focus()">دھوکہ آزمائیں</button>
       </div>
     </div>
 

@@ -78,6 +78,40 @@
       margin-top: 5px;
     }
 
+    #tip-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 7px 12px 7px 14px;
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      direction: ltr;
+    }
+
+    .tip-text {
+      flex: 1;
+      font-family: var(--font-s);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .tip-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0 0 0 4px;
+      opacity: 0.55;
+      flex-shrink: 0;
+    }
+
+    .tip-close:hover { opacity: 1; }
+
     .input-card {
       background: var(--card);
       border: 1px solid var(--hairline);
@@ -536,10 +570,15 @@
 
   <main>
 
+    <div id="tip-bar">
+      <span class="tip-text">Tip: tap <strong>English</strong> on any result to read it in English.</span>
+      <button class="tip-close" onclick="document.getElementById('tip-bar').style.display='none'" aria-label="Dismiss">×</button>
+    </div>
+
     <section id="input-section">
       <div class="input-card">
         <textarea id="msg" dir="auto" placeholder="یہاں اپنا پیغام لکھیں یا پیسٹ کریں"></textarea>
-        <p class="helper">اردو، رومن اردو یا انگریزی، کوئی بھی چلے گا</p>
+        <p class="helper">اردو، رومن اردو یا انگریزی میں لکھیں</p>
         <button id="explain-btn" class="btn-primary" onclick="explain()">سمجھائیں</button>
       </div>
     </section>

@@ -22,6 +22,12 @@ Specific word rules (enforce strictly):
 - ملیں گے not فراہم کیے جائیں گے
 - فون not موبائل فون (in casual context)
 - پِن not خفیہ کوڈ
+- ورنہ not بصورتِ دیگر
+- آپ کے بچے not زیرِ کفالت طالبعلم or زیرِ کفالت
+- ملنا / آنا not اجراء (e.g. وظیفہ ملنے کے لیے not وظیفے کے اجراء کے لیے)
+- حاضری not حاضری کا تناسب (just say "اسکول آنا" or "حاضری")
+- روک دی جائے گی / دیر ہو گی not موخر کر دی جائے گی
+- تصدیق کرنا not تصدیق لازمی ہے (say "تصدیق کرائیں" directly)
 
 - If an official term must appear (CNIC, B-Form, 8171, biometric), explain it immediately in plain everyday words right after.
 - Sentence openings in Urdu: do not start a sentence with bare اِن or اُن. Rephrase to open with یہ لوگ, وہ لوگ, or restructure the sentence. This also helps the voice read it correctly.
@@ -70,7 +76,7 @@ What each field means (write it in that object's language):
 - "safety_reason": a short plain explanation of why you chose the safety_status.
 - "official_source": how to verify. For BISP matters: send the mother's 13-digit CNIC (without dashes) to 8171, or visit the nearest BISP office.
 - "note": one honest sentence reminding them that only BISP or the school decides who qualifies.
-- "spoken_version": a single natural flowing paragraph combining the above, written to sound good when read aloud. For "urdu" this MUST be proper Urdu script, because a voice will read it to people who cannot read.
+- "spoken_version": a single natural flowing paragraph combining the above, written to sound good when read aloud. For "urdu" this MUST be proper Urdu script, because a voice will read it to people who cannot read. spoken_version must follow every plain-language rule above without exception — if a formal word appeared in another field, replace it here with the simplest everyday word. The spoken_version is the most important field for low-literacy users: it must be the plainest, warmest, most natural thing you write.
 
 ## Per-type field rules
 

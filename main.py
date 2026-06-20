@@ -122,15 +122,13 @@ def _urdu_words(n: int) -> str:
 
 
 def _preprocess_tts(text: str, lang: str) -> str:
-    # Always space out the helpline code so it reads digit-by-digit
     text = re.sub(r'(?<!\d)8171(?!\d)', '8 1 7 1', text)
     if lang == "urdu":
-        # Convert remaining standalone numbers to Urdu words
+        # "B-Form" / "بی فارم" → "بے فارم" so TTS says "bay form" not "bee form"
+        text = re.sub(r'B-?Form', 'بے فارم', text, flags=re.IGNORECASE)
+        text = text.replace('بی فارم', 'بے فارم')
         text = re.sub(r'(?<!\d)\d+(?!\d)', lambda m: _urdu_words(int(m.group())), text)
-        # Backup: اِن/اُن at sentence start gets mispronounced as English "in".
-        # Insert a zero-width non-joiner after it so the TTS sees Urdu context.
         text = re.sub(r'(?m)(^|[۔؟!.?]\s*)(اِن|اُن|ان)(\s)', r'\1\2‌\3', text)
-    # For roman_urdu / english, leave digits as-is — the TTS reads them naturally
     return text
 
 

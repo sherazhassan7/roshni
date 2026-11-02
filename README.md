@@ -1,65 +1,56 @@
 # Roshni (روشنی)
 
-Roshni explains confusing Pakistani BISP and government benefit messages in simple Urdu, Roman Urdu, or English, reads the explanation aloud via text-to-speech, and gives a plain safety verdict — safe, caution, or likely scam.
+Roshni turns confusing BISP and government benefit messages into plain language. Paste a message, and it explains what it says in simple Urdu, Roman Urdu or English, reads the explanation aloud, and tells you whether the message looks safe, needs caution, or is likely a scam.
 
-Built for low-literacy users, especially mothers who receive BISP Benazir Taleemi Wazaif (education stipend) messages they cannot easily read or verify.
+I built it for low-literacy users, especially mothers who receive BISP Benazir Taleemi Wazaif (education stipend) messages they can't easily read or verify. Scam messages imitating BISP are common, and the people they target are often the least able to check them.
 
----
+## What it does
 
-## Features
+- Explains any pasted BISP, benefit or school-stipend message: what it says, who it's for, what to do, and any deadline
+- Shows the explanation in Urdu, Roman Urdu or English, switchable on the result screen
+- Reads the explanation aloud
+- Gives a clear verdict (**safe**, **caution** or **likely scam**) with the reason behind it
+- Points users to BISP's official 8171 service to verify a message
+- Mobile-first, right-to-left Urdu interface, with bilingual labels for non-Urdu readers
 
-- Paste any BISP, government benefit, or school-stipend message
-- Plain-language explanation in Urdu, Roman Urdu, or English (toggle on the result)
-- Explanation read aloud via text-to-speech
-- Clear safety verdict: **safe** · **caution** · **likely scam**
-- Accurate scam warnings — never confuses real BISP notices with fraud
-- Mobile-first, right-to-left Urdu UI; bilingual labels for non-Urdu readers
+## How it works
 
----
+A FastAPI backend sends the message to GPT-4o with a system prompt (`system_prompt.md`) that classifies it and returns a structured explanation in all three languages. A second endpoint turns the explanation into speech with OpenAI's `gpt-4o-mini-tts`, falling back to `tts-1`. Before the text is spoken, Urdu numbers are converted into words and the 8171 helpline is read out digit by digit, so it's easy to follow. The frontend is a single HTML page in plain JavaScript, with no build step.
 
-## Setup
+Roshni explains messages. It doesn't decide who qualifies for BISP support; only BISP does.
+
+Messages you paste are sent to OpenAI's API to generate the explanation and the audio.
+
+## Run it locally
 
 ```bash
+git clone https://github.com/sherazhassan7/roshni.git
+cd roshni
 python3 -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-Create a `.env` file in the project root:
-
-```
-OPENAI_API_KEY=sk-...
-```
-
-Start the server:
-
-```bash
+cp .env.example .env             # then add your OpenAI API key to .env
 uvicorn main:app --reload
 ```
 
-Open [http://localhost:8000](http://localhost:8000).
-
----
+Open [http://localhost:8000](http://localhost:8000). `test_messages.json` has sample messages to try.
 
 ## Project structure
 
 ```
-main.py              FastAPI backend — /explain and /speak endpoints
-system_prompt.md     System prompt sent to gpt-4o for message classification
-static/index.html    Single-page frontend (vanilla JS, no build step)
+main.py              FastAPI backend: /explain and /speak endpoints
+system_prompt.md     System prompt sent to GPT-4o to classify and explain messages
+static/index.html    Single-page frontend (plain JavaScript, no build step)
 requirements.txt     Python dependencies
-.env                 API key — not committed
+.env.example         Template for your API key (copy to .env, which is not committed)
 test_messages.json   Sample messages for manual testing
-README.md
 ```
-
----
 
 ## API
 
 ### POST /explain
 
-Classifies and explains a message. Returns structured JSON in all three languages.
+Classifies and explains a message, returning structured JSON in all three languages.
 
 **Request**
 
@@ -83,8 +74,8 @@ Classifies and explains a message. Returns structured JSON in all three language
     "note": "وظیفہ ملنا بی آئی ایس پی طے کرتی ہے، یہ ایپ نہیں۔",
     "spoken_version": "یہ بی آئی ایس پی کا میسج ہے۔ ..."
   },
-  "roman_urdu": { "...same eight fields in Roman Urdu..." },
-  "english":    { "...same eight fields in English..." }
+  "roman_urdu": { "...same eight fields in Roman Urdu...": "" },
+  "english":    { "...same eight fields in English...": "" }
 }
 ```
 
@@ -95,24 +86,24 @@ Classifies and explains a message. Returns structured JSON in all three language
 | `message_type` | `official` · `scam` · `unrelated` · `unclear` |
 | `safety_status` | `safe` · `caution` · `likely_scam` |
 
-**Per-language fields** (same structure for `urdu`, `roman_urdu`, `english`)
+**Fields in each language block** (`urdu`, `roman_urdu`, `english`)
 
-| Field | Notes |
+| Field | What it holds |
 |---|---|
 | `summary` | One or two plain sentences describing the message |
-| `applies_to_you` | Who this message is for |
-| `what_to_do` | Array of concrete steps; `[]` if nothing to do |
-| `deadline` | Date or time limit stated in the message, or `""` |
-| `safety_reason` | Why this safety verdict was assigned |
-| `official_source` | How to verify (typically: send CNIC to 8171) |
-| `note` | Eligibility reminder — only BISP decides who qualifies |
-| `spoken_version` | Natural flowing paragraph for TTS playback |
+| `applies_to_you` | Who the message is for |
+| `what_to_do` | Concrete steps, or `[]` if there's nothing to do |
+| `deadline` | Any date or time limit stated in the message, or `""` |
+| `safety_reason` | Why this safety verdict was given |
+| `official_source` | How to verify (usually: send your CNIC number to 8171) |
+| `note` | Eligibility reminder: only BISP decides who qualifies |
+| `spoken_version` | A natural paragraph written for text-to-speech |
 
-Fields that do not apply to a given `message_type` are returned as empty strings or empty arrays and are not shown in the UI.
+Fields that don't apply to a given `message_type` come back as empty strings or arrays and aren't shown in the interface.
 
 ### POST /speak
 
-Converts text to speech and returns MP3 audio. Called internally by the frontend.
+Converts text to speech and returns MP3 audio. The frontend calls it internally.
 
 **Request**
 
@@ -120,8 +111,8 @@ Converts text to speech and returns MP3 audio. Called internally by the frontend
 { "text": "یہ میسج محفوظ ہے۔", "lang": "urdu" }
 ```
 
-`lang` is one of `urdu` · `roman_urdu` · `english`. Urdu text gets Urdu number-to-words conversion and helpline spacing (8171 → digit-by-digit) before synthesis.
+`lang` is one of `urdu`, `roman_urdu` or `english`. Urdu text gets number-to-words conversion before synthesis, and 8171 is spaced out so it's read digit by digit.
 
-**Response:** `audio/mpeg` binary.
+**Response:** `audio/mpeg`
 
-**Models:** `gpt-4o-mini-tts` (primary), falls back to `tts-1`. Voice: nova.
+**Models:** `gpt-4o-mini-tts` (primary), with `tts-1` as a fallback. Voice: nova.
